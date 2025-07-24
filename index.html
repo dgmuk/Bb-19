@@ -1,1 +1,274 @@
-1
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чек-лист «Энергия на каждый день»</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Исправление для Google Sites */
+        html, body {
+            height: auto !important;
+            min-height: 1px !important;
+            overflow: visible !important; 
+        }
+
+        /* Анимация для плавного появления блоков */
+        .fade-in-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стилизация чекбоксов */
+        .form-checkbox {
+            appearance: none; -webkit-appearance: none;
+            width: 1.5rem; height: 1.5rem;
+            border: 2px solid #4b5563;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        .form-checkbox:checked {
+            background-color: #2dd4bf; /* teal-400 */
+            border-color: #2dd4bf;
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+        .form-checkbox:checked + span {
+            color: #2dd4bf;
+        }
+        
+        /* Стилизация текстовых полей */
+        .form-textarea {
+            background-color: #374151; border: 1px solid #4b5563;
+            border-radius: 0.5rem; padding: 0.75rem; width: 100%;
+            color: #d1d5db; transition: all 0.2s;
+            min-height: 50px; resize: vertical;
+        }
+        .form-textarea:focus {
+            outline: none; border-color: #2dd4bf;
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.3);
+        }
+        
+        /* Стилизация звезд рейтинга */
+        .rating-star {
+            cursor: pointer;
+            color: #4b5563; /* gray-600 */
+            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .rating-star:hover {
+            transform: scale(1.1);
+        }
+        .rating-star.selected {
+            color: #f59e0b; /* amber-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <div id="main-container" class="container mx-auto max-w-3xl p-4 sm:p-8">
+        
+        <!-- Заголовок -->
+        <header class="text-center mb-10 fade-in-item">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white">
+                ✅ Чек-лист «Энергия на каждый день»
+            </h1>
+            <p class="mt-4 text-base text-gray-400 max-w-2xl mx-auto">Цель - фиксировать простые действия, которые влияют на твою усталость и уровень энергии.</p>
+        </header>
+        
+        <!-- Вступительный блок -->
+        <div class="bg-gray-800 rounded-2xl p-6 mb-10 text-center fade-in-item" style="animation-delay: 100ms;">
+             <p class="text-lg text-gray-300">📆 Заполняй в конце каждого дня. Не для отчёта - для себя. Чтобы видеть: от чего тебе реально становится лучше.</p>
+        </div>
+
+        <!-- Блоки с вопросами -->
+        <main id="checklist-form" class="space-y-8">
+            
+            <!-- Блок: Сон -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 200ms;">
+                <h3 class="font-bold text-2xl text-white mb-4">🔹 Сон</h3>
+                <div class="space-y-4">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="sleep1" class="form-checkbox mr-4"><span class="transition-colors">Я лег спать до 23:00</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="sleep2" class="form-checkbox mr-4"><span class="transition-colors">Я не использовал телефон за час до сна</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="sleep3" class="form-checkbox mr-4"><span class="transition-colors">Я спал не менее 7 часов</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="sleep4" class="form-checkbox mr-4"><span class="transition-colors">Сон был непрерывным и спокойным</span></label>
+                </div>
+            </div>
+
+            <!-- Блок: Питание -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 300ms;">
+                <h3 class="font-bold text-2xl text-white mb-4">🔹 Питание</h3>
+                <div class="space-y-4">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="food1" class="form-checkbox mr-4"><span class="transition-colors">У меня были 3–4 приёма пищи без перееданий</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="food2" class="form-checkbox mr-4"><span class="transition-colors">Я не пропускал еду более чем на 5 часов</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="food3" class="form-checkbox mr-4"><span class="transition-colors">Не было резкой тяги к сладкому</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="food4" class="form-checkbox mr-4"><span class="transition-colors">Я выпил не менее 1.5 л воды</span></label>
+                </div>
+            </div>
+
+            <!-- Блок: Движение -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 400ms;">
+                <h3 class="font-bold text-2xl text-white mb-4">🔹 Движение</h3>
+                <div class="space-y-4">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="move1" class="form-checkbox mr-4"><span class="transition-colors">Я сделал тренировку/кардио/прогулку</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="move2" class="form-checkbox mr-4"><span class="transition-colors">После активности чувствовал себя лучше, а не хуже</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="move3" class="form-checkbox mr-4"><span class="transition-colors">Не сидел более 2 часов подряд без движения</span></label>
+                </div>
+            </div>
+
+            <!-- Блок: Пауза -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 500ms;">
+                <h3 class="font-bold text-2xl text-white mb-4">🔹 Пауза для восстановления</h3>
+                <div class="space-y-4">
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="rest1" class="form-checkbox mr-4"><span class="transition-colors">Я дал себе минимум 10 минут тишины или расслабления</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="rest2" class="form-checkbox mr-4"><span class="transition-colors">Не скроллил телефон в режиме «залипания»</span></label>
+                    <label class="flex items-center cursor-pointer"><input type="checkbox" id="rest3" class="form-checkbox mr-4"><span class="transition-colors">Сделал 1 действие для себя (душ, музыка, дыхание и т.п.)</span></label>
+                </div>
+            </div>
+
+            <!-- Блок: Оценка дня -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg p-6 fade-in-item" style="animation-delay: 600ms;">
+                <h3 class="font-bold text-2xl text-white mb-4">🔹 Оценка дня</h3>
+                <div class="space-y-6">
+                    <div>
+                        <p class="font-semibold text-lg mb-3">Какой у меня был уровень энергии по шкале от 1 до 5?</p>
+                        <div id="energy-rating" class="flex items-center space-x-2 text-4xl">
+                            <span class="rating-star" data-value="1">★</span>
+                            <span class="rating-star" data-value="2">★</span>
+                            <span class="rating-star" data-value="3">★</span>
+                            <span class="rating-star" data-value="4">★</span>
+                            <span class="rating-star" data-value="5">★</span>
+                        </div>
+                        <input type="hidden" id="energy-rating-value" value="0">
+                    </div>
+                    <div>
+                        <label for="energy-source" class="font-semibold text-lg">Что дало мне сегодня больше всего сил?</label>
+                        <textarea id="energy-source" class="form-textarea mt-2" placeholder="✍️ Короткий ответ..."></textarea>
+                    </div>
+                    <div>
+                        <label for="energy-drain" class="font-semibold text-lg">Что, наоборот, отняло энергию?</label>
+                        <textarea id="energy-drain" class="form-textarea mt-2" placeholder="✍️ Короткий ответ..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Заключение -->
+        <div class="mt-10 text-center text-gray-400 space-y-4 fade-in-item" style="animation-delay: 700ms;">
+             <div class="bg-teal-900/30 border-l-4 border-teal-500 text-teal-200 p-4 rounded-r-lg text-left" role="alert">
+                <p class="font-bold">📌 Заполняй этот чек-лист каждый день хотя бы в течение недели - ты сам увидишь, что влияет на твою форму больше всего.</p>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <footer class="text-center mt-12 border-t border-gray-700 pt-6">
+            <p class="text-sm text-gray-500">&copy; 2025 г. Все права защищены. Специально для проекта Body balance.</p>
+        </footer>
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('main-container');
+            const form = document.getElementById('checklist-form');
+            const allInputs = form.querySelectorAll('input[type="checkbox"], textarea');
+            const ratingStars = document.querySelectorAll('.rating-star');
+            const ratingValueInput = document.getElementById('energy-rating-value');
+            const STORAGE_KEY = 'dailyEnergyChecklistState';
+
+            // --- Функции сохранения и загрузки ---
+            function saveState() {
+                const state = {};
+                allInputs.forEach(input => {
+                    if (input.type === 'checkbox') {
+                        state[input.id] = input.checked;
+                    } else {
+                        state[input.id] = input.value;
+                    }
+                });
+                state[ratingValueInput.id] = ratingValueInput.value;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+            
+            function loadState() {
+                const savedState = localStorage.getItem(STORAGE_KEY);
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    allInputs.forEach(input => {
+                        if (state[input.id] !== undefined) {
+                            if (input.type === 'checkbox') {
+                                input.checked = state[input.id];
+                            } else {
+                                input.value = state[input.id];
+                            }
+                        }
+                    });
+                    if (state[ratingValueInput.id]) {
+                        updateRating(state[ratingValueInput.id], false);
+                    }
+                }
+            }
+
+            // --- Логика рейтинга ---
+            function updateRating(value, shouldSave = true) {
+                ratingValueInput.value = value;
+                ratingStars.forEach(star => {
+                    if (star.dataset.value <= value) {
+                        star.classList.add('selected');
+                    } else {
+                        star.classList.remove('selected');
+                    }
+                });
+                if (shouldSave) saveState();
+            }
+
+            ratingStars.forEach(star => {
+                star.addEventListener('click', () => {
+                    updateRating(star.dataset.value);
+                });
+            });
+
+            // --- Обработчики событий ---
+            allInputs.forEach(input => {
+                input.addEventListener('input', saveState);
+            });
+            
+            // --- Исправление высоты для Google Sites ---
+            if ('ResizeObserver' in window) {
+                const observer = new ResizeObserver(entries => {
+                    if (entries.length > 0) {
+                        const height = entries[0].target.scrollHeight;
+                        document.body.style.height = height + 'px';
+                        document.documentElement.style.height = height + 'px';
+                    }
+                });
+                if (container) observer.observe(container);
+            } else {
+                const resizeFallback = () => {
+                    if(container) document.body.style.height = container.scrollHeight + 'px';
+                };
+                setInterval(resizeFallback, 300);
+                window.addEventListener('resize', resizeFallback);
+            }
+
+            // Запускаем всё
+            loadState();
+        });
+    </script>
+</body>
+</html>
